@@ -13,22 +13,22 @@ def create_database():
         # Connect to MySQL server without specifying a database
         connection = mysql.connector.connect(
             host='localhost',
-            user='root',  # Change to your MySQL username
-            password=''   # Change to your MySQL password
+            user='root',      # Your MySQL username
+            password='',      # Your MySQL password
+            port=3306         # Your MySQL port (default is 3306)
         )
         
         if connection.is_connected():
             cursor = connection.cursor()
             
             # Create database if it doesn't exist
-            # Using CREATE DATABASE IF NOT EXISTS to avoid failures
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
             
             print("Database 'alx_book_store' created successfully!")
             
-    except Error as e:
-        print(f"Error: {e}")
-        print("Failed to connect to MySQL database")
+    except mysql.connector.Error as e:
+        print(f"Error connecting to MySQL: {e}")
+        print("Please check your MySQL server is running and credentials are correct")
         
     finally:
         # Close connection if it was established
