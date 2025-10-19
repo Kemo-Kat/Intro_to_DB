@@ -60,12 +60,11 @@ CREATE TABLE Orders (
 )
 ;
 
--- Create Order_Details table
 CREATE TABLE Order_Details (
     orderdetailid INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT,
     book_id INT,
-    quantity INT NOT NULL,
+    quantity DOUBLE NOT NULL,
     unit_price DECIMAL(10, 2) NOT NULL,
     subtotal DECIMAL(10, 2) GENERATED ALWAYS AS (quantity * unit_price) STORED,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE,
@@ -73,5 +72,5 @@ CREATE TABLE Order_Details (
     INDEX idx_order (order_id),
     INDEX idx_book (book_id),
     UNIQUE KEY unique_order_book (order_id, book_id)
-)
+    )
 ;
